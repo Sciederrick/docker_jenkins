@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Math Buddy</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Basic Calculator</h1>
+
+      <form id="exercise-form" method="get">
+        <select id="op">
+          <option>addition</option>
+          <option>subtraction</option>
+          <option>division</option>
+          <option>multiplication</option>
+        </select>
+        <div class="ops-container">
+          <input id="op1" type="number" name="op1" required/> <span id="op-sign">+</span>
+          <input id="op2" type="number" name="op2" required/> =
+          <pre id="answer"></pre>
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
+      <div class="container">
+        <br/>
+        <hr/>
+        <h2>API Endpoints:</h2>
+        <pre id="all-endpoints">
+          http://localhost:3000/api/ops/addition
+          http://localhost:3000/api/ops/subtraction
+          http://localhost:3000/api/ops/multiplication
+          http://localhost:3000/api/ops/division
+        </pre>
+
+      </div>
+    </div>
+    <script>
+      const exerciseForm = document.getElementById("exercise-form")
+      const opSelectInput = document.getElementById("op")
+      const opSign = document.getElementById("op-sign")
+      
+      opSelectInput.addEventListener("change", (event) => {
+        const currentOp = event.target.value
+        if (currentOp == 'addition') {
+          opSign.innerText = '+'
+        } else if (currentOp == 'subtraction') {
+          opSign.innerText = '-'
+        } else if (currentOp == 'division') {
+          opSign.innerText = '/'
+        } else if (currentOp == 'multiplication') {
+          opSign.innerText = 'x'
+        }
+      })
+      
+      exerciseForm.addEventListener("submit", async (event) => {
+        const op = document.getElementById("op").value
+        const op1 = document.getElementById("op1").value
+        const op2 = document.getElementById("op2").value
+        const url = `http://localhost:3000/api/ops/${op}?op1=${op1}&op2=${op2}`
+        
+        event.preventDefault()
+        const result = await fetch(url)
+        const data = await result.json()
+        document.getElementById("answer").innerText = data.answer ?? '⃠'
+      })
+    </script>
+  </body>
+</html>
