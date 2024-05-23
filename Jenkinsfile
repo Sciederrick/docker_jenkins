@@ -6,8 +6,10 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                def dockerHome = tool 'app_docker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"  
+                script {
+                    def dockerHome = tool 'app_docker'
+                    env.PATH = "${dockerHome}/bin:${env.PATH}"  
+                }
                 sh 'docker build -t math_buddy:1.0 .'
             }
         }
