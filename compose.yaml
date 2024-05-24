@@ -49,9 +49,9 @@ services:
 #   db-password:
 #     file: db/password.txt
 
-  # jenkins:
-    # image: jenkins/jenkins:lts-jdk17
-    # volumes:
-    #   - //./pipe/docker_engine:/var/run/docker.sock:ro  # Windows named pipe, read-only
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    volumes:
+      - //./pipe/docker_engine:/var/run/docker.sock:ro  # Windows named pipe, read-only
 
 
