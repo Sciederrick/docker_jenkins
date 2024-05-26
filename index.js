@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended:true }))
 app.use(express.static('public'))
 
 app.get('/', (_, res) => {
+    // eslint-disable-next-line no-undef
     return res.sendFile(__dirname + '/views/index.html')
 })
 
