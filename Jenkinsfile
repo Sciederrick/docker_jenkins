@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent { 
+        docker {
+            image 'node:20-alpine'
+        }
+    }
     environment {
         DOCKER_REGISTRY = 'sciederrick'
         DOCKER_IMAGE = 'math_buddy'
@@ -10,6 +14,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'node -v'
                 sh 'npm install'
             }
         }
