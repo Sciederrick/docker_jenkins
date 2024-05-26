@@ -1,12 +1,12 @@
 pipeline {
-    agent { 
-        docker {
-            image 'node:20-alpine'
-        }
-    }
+    agent any
     environment {
         DOCKER_REGISTRY = 'sciederrick'
         DOCKER_IMAGE = 'math_buddy'
+        NODE_VERSION = '20.x'
+    }
+    tools {
+        nodejs NODE_VERSION 
     }
     triggers {
         pollSCM 'H/30 * * * *'
@@ -55,29 +55,6 @@ pipeline {
             }
         }
 
-        // stage('Monitoring and Alerting') {
-        //     steps {
-        //         script {
-        //             // Example of triggering a monitoring tool (Datadog)
-        //             sh '''
-        //             curl -X POST "https://api.datadoghq.com/api/v1/monitor" \
-        //                 -H "Content-Type: application/json" \
-        //                 -H "DD-API-KEY: your-datadog-api-key" \
-        //                 -d '{
-        //                     "name": "Production Deployment",
-        //                     "type": "metric alert",
-        //                     "query": "avg(last_1h):avg:system.cpu.idle{environment:production} by {host} < 20",
-        //                     "message": "High CPU usage detected in production",
-        //                     "tags": ["env:production"],
-        //                     "options": {
-        //                         "notify_no_data": false,
-        //                         "no_data_timeframe": 2
-        //                     }
-        //                 }'
-        //             '''
-        //         }
-        //     }
-        // }
     }
 
     post {
