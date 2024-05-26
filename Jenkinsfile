@@ -71,18 +71,16 @@ pipeline {
             // Clean up
             cleanWs()
         }
-        // success {
-        //     // Notify success (example using email)
-        //     mail to: 'your-email@example.com',
-        //          subject: "Success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-        //          body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully."
-        // }
-        // failure {
-        //     // Notify failure
-        //     mail to: 'your-email@example.com',
-        //          subject: "Failure: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-        //          body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed. Please check the Jenkins logs for details."
-        // }
+        success {
+            mail to: 'derrickmbarani@gmail.com',
+                 subject: "Success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                 body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully."
+        }
+        failure {
+            mail to: 'derrickmbarani@gmail.com',
+                 subject: "Failure: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                 body: "The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed. Please check the Jenkins logs for details."
+        }
     }
 
 }
