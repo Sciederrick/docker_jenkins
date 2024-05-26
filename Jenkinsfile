@@ -56,6 +56,7 @@ pipeline {
         stage('Release to Production') {
             steps {
                 script {
+                    sh 'docker images'
                     sh 'docker tag ${DOCKER_IMAGE}:staging ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:production'
                     sh 'docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:production'
                 }
