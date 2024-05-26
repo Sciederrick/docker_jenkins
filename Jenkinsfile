@@ -9,7 +9,9 @@ pipeline {
     }
     stages {
         stage('Build') {
-            sh 'npm install'
+            steps {
+                sh 'npm install'
+            }
         }
         stage('Run Tests') {
             steps {
@@ -18,9 +20,7 @@ pipeline {
         }
         stage('Code Quality Analysis') {
             steps {
-                script {
-                    sh 'npx eslint .'
-                }
+                sh 'npx eslint .'
             }
         }
 
