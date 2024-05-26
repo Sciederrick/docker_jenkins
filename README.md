@@ -1,5 +1,5 @@
 # CI/CD Pipeline for Deploying a Simple Node/Express App to Dockerhub
-
+![screenshot](./jenkins-5-screenshot.png)
 ## Setup
 
 - Install the NodeJS plugin from `Jenkins Available Plugins`
