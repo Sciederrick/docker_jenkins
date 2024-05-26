@@ -4,6 +4,7 @@ pipeline {
         DOCKER_REGISTRY = 'sciederrick'
         DOCKER_IMAGE = 'math_buddy'
         NODE_VERSION = '20.x'
+        DOCKERHUB_CREDENTIALS = credentials('sciederrick_dockerhub')
     }
     tools {
         nodejs NODE_VERSION 
@@ -37,6 +38,12 @@ pipeline {
             }
         }
 
+        stage('Docker Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
         stage('Deploy to Staging') {
             steps {
                 script {
@@ -59,6 +66,7 @@ pipeline {
 
     post {
         always {
+            sh 'docker logout'
             // Clean up
             cleanWs()
         }
